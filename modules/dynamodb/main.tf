@@ -1,22 +1,20 @@
-module "dynamodb_tables" {
-  source = "./modules/dynamodb_tables"
+resource "aws_dynamodb_table" "tables" {
+  for_each    = var.tables
+  name        = each.value.name
+  billing_mode = each.value.billing_mode
 
-  region = "us-west-2"
+  hash_key = each.value.hash_key
+  range_key = each.value.range_key
 
-  tables = {
-    "table1" = {
-      name        = "table1"
-      billing_mode = "PAY_PER_REQUEST"
-      hash_key    = "id"
-      range_key   = "timestamp"
-      
-    },
-    "table2" = {
-      name        = "table2"
-      billing_mode = "PROVISIONED"
-      hash_key    = "user_id"
-      range_key   = "created_at"
-      
-    }
+  attribute {
+    name = each.value.hash_key
+    type = "S"
   }
+
+  attribute {
+    name = each.value.range_key
+    type = "S"
+  }
+
+  
 }
