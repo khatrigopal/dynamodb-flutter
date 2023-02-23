@@ -9,5 +9,4 @@ terraform {
     region = "us-east-1"
   }
 }
-Footer
-© 2023 GitHub, In
+
