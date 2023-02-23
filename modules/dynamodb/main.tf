@@ -1,11 +1,22 @@
-resource "aws_dynamodb_table" "example" {
-  count          = length(var.tables)
-  name           = var.tables[count.index].name
-  billing_mode   = var.tables[count.index].billing_mode
-  hash_key       = var.tables[count.index].hash_key
-  range_key      = var.tables[count.index].range_key
-  attribute {
-    name = var.tables[count.index].attribute_name
-    type = var.tables[count.index].attribute_type
+module "dynamodb_tables" {
+  source = "./modules/dynamodb_tables"
+
+  region = "us-west-2"
+
+  tables = {
+    "table1" = {
+      name        = "table1"
+      billing_mode = "PAY_PER_REQUEST"
+      hash_key    = "id"
+      range_key   = "timestamp"
+      
+    },
+    "table2" = {
+      name        = "table2"
+      billing_mode = "PROVISIONED"
+      hash_key    = "user_id"
+      range_key   = "created_at"
+      
+    }
   }
 }
