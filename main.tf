@@ -11,7 +11,7 @@ module "dynamodb_tables" {
     },
     "table2" = {
       name        = "table2"
-      billing_mode = "PROVISIONED"
+      billing_mode = "PAY_PER_REQUEST"
       hash_key    = "user_id"
       range_key   = "created_at"
       
