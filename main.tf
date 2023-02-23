@@ -15,7 +15,8 @@ module "dynamodb_tables" {
       name          = "example-table-2"
       billing_mode  = "PAY_PER_REQUEST"
       hash_key      = "testid"
-      attribute_name  = "secondid"
+      range_key     =  "secondid"
+      attribute_name  = "id"
       attribute_type  = "S"
     }
   ]
